@@ -4,7 +4,16 @@
 *:focus{
   outline: 2px dotted blue;
   -webkit-animation: border 0.6s ease-out infinite;
+  -moz-animation: border 0.6s ease-out infinite;
+  -ms-animation: border 0.6s ease-out infinite;
   animation: border 0.6s ease-out infinite;
+}
+button:hover{
+  outline: 2px dotted blue;
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
 }
 
 @-webkit-keyframes border {

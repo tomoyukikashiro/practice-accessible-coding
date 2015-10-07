@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tabindex</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <main>
+    <section>
+      <h1>Attention</h1>
+      <p>Button tag's type attribute is submit by default. so make sure to set it's attribute.</p>
+    </section>
+    <section>
+      <h1>button with aria-label</h1>
+      <div class="example">
+        <button type="button" aria-label="undo">&#171;</button>
+      </div>
+      <h1>button with aria-labelledy</h1>
+      <div class="example">
+        <p>If you want to undo operation, please click <span id="undo-text">undo button</span>.</p>
+        <button type="button" aria-labelledy="undo-text">&#171;</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
