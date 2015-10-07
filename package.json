@@ -1,0 +1,26 @@
+{
+  "name": "practice-accessible-coding",
+  "version": "0.1.0",
+  "description": "practice accessible UI module coding",
+  "license": "MIT",
+  "homepage": "https://github.com/kashiro/practice-accessible-coding",
+  "repository": "https://github.com/kashiro/practice-accessible-coding",
+  "bugs": "https://github.com/kashiro/practice-accessible-coding/issues",
+  "contributors": "https://github.com/kashiro/practice-accessible-coding/graphs/contributors",
+  "scripts": {},
+  "keywords": [],
+  "author": {
+    "name": "Tomoyuki Kashiro",
+    "email": "ksrtmyk@gmail.com",
+    "url": "http://kashiro.github.com"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.9.8",
+    "fly": "^0.8.3"
+  },
+  "engines": {
+    "iojs": ">= 1.0.0",
+    "node": ">= 0.11.0"
+  }
+}

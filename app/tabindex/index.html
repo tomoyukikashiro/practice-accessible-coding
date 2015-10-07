@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tabindex</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <main>
+    <section>
+      <h1>tabindex=0</h1>
+      <p>Elements which have tabindex=0 attribute can be focused.</p>
+      <div class="example">
+        <h2>li tag can not be focused by default</h2>
+        <ul>
+          <li>apple</li>
+          <li>banana</li>
+          <li>mango</li>
+        </ul>
+        <h2>li tag (with tabindex=0) can be focused.</h2>
+        <ul>
+          <li tabindex="0">apple</li>
+          <li tabindex="0">banana</li>
+          <li tabindex="0">mango</li>
+        </ul>
+        <h2>li tag (with tabindex=1+) can be focused in value order.</h2>
+        <ul>
+          <li tabindex="2">apple (tabindex="2")</li>
+          <li tabindex="4">banana (tabindex="4")</li>
+          <li tabindex="3">mango (tabindex="3")</li>
+        </ul>
+        <h2>li tag (with tabindex=-1) can be focused using javascript.</h2>
+        <button class="js-button">move focus</button>
+        <ul class="js-list">
+          <li tabindex="-1">apple</li>
+          <li tabindex="-1">banana</li>
+          <li tabindex="-1">mango</li>
+        </ul>
+        <script>
+          var list = document.querySelectorAll('.js-list li');
+          var button = document.querySelectorAll('.js-button')[0];
+          var index = 0;
+          button.addEventListener('click', function(){
+            list[index].focus();
+            index = ++index % list.length;
+            console.log(index);
+          });
+        </script>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
