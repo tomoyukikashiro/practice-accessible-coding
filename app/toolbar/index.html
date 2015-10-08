@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>toolbar</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <main>
+    <section>
+      <h1>toolbar with aria-label and aria-controls</h1>
+      <p>express the relation between toolbar and list using aria-controls and which button is selected using aria-pressed.</p>
+      <p>After selecting sort the focus move to list using javascript.</p>
+      <div class="example">
+        <div role="toolbar" aria-label="sort list" aria-controls="sortable">
+          <button class="button" type="button" data-sort="asc" aria-pressed="true">ASC</button>
+          <button class="button" type="button" data-sort="dsc" aria-pressed="false">DSC</button>
+        </div>
+        <ul class="list" id="sortable" tabindex="-1">
+          <li class='sl' data-index="1">list 1</li>
+          <li class='sl' data-index="2">list 2</li>
+          <li class='sl' data-index="3">list 3</li>
+        </ul>
+      </div>
+      <script>
+        var items = document.querySelectorAll('.sl');
+        var list = document.querySelectorAll('.list')[0];
+        var buttons = document.querySelectorAll('.button');
+
+        each(buttons, function(button){
+          button.addEventListener('click', onClickButton);
+        });
+
+        function onClickButton(){
+          sortList(this.dataset.sort);
+          toggleButtonState(this.dataset.sort);
+        }
+
+        function toggleButtonState(sortType) {
+          var key = 'aria-pressed';
+          if(sortType === 'asc'){
+            buttons[0].setAttribute(key, true);
+            buttons[1].setAttribute(key, false);
+          }else{
+            buttons[0].setAttribute(key, false);
+            buttons[1].setAttribute(key, true);
+          }
+        }
+
+        function sortList(sortType){
+          var offset = sortType === 'asc' ? -1 : -3;
+          var sorted = [];
+          each(items, function(item){
+            var index = Math.abs(parseInt(item.dataset.index, 10) + offset);
+            sorted[index] = item;
+          });
+          list.innerHTML = '';
+          each(sorted, function(item){
+            list.appendChild(item);
+          });
+          // focus list
+          list.focus();
+        }
+
+        function each(nodeList, cb){
+          Array.prototype.forEach.call(nodeList, cb);
+        }
+      </script>
+    </section>
+  </main>
+</body>
+</html>
