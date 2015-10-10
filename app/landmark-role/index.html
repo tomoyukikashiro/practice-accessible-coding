@@ -5,6 +5,9 @@
   <title>landmark role</title>
   <link rel="stylesheet" href="/styles/main.css">
   <style>
+    body{
+      position: relative;
+    }
     .layout {
       outline: 1px solid green;
       color: green;
@@ -33,10 +36,20 @@
       left: 10px;
       top: 30px;
     }
+    .skip{
+      display: inline-block;
+      transform: translate(-50%, -100px);
+      transition: transform 0.3s ease-in;
+      position: absolute;
+      left: 50%;
+    }
+    .skip:focus{
+      transform: translate(-50%, 0);
+    }
     .content{
       margin: 30px 0;
       display: flex;
-      height: 500px;
+      height: 800px;
       justify-content: space-between;
     }
     main{
@@ -55,8 +68,25 @@
       height: 100px;
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var skip = document.querySelectorAll('.skip')[0];
+      var main = document.getElementById('main');
+      skip.addEventListener('click', function(){
+        main.setAttribute('tabindex', -1);
+        main.focus();
+      });
+    });
+  </script>
 </head>
 <body>
+  <!--
+    skip link
+      - the skip link is located out of screen to hide for healthy people.
+      - if the link is focused it is located inside of screen to show for screen reader user and keyboard user.
+      - move focus to main after clicking skip link to read contents in main tag for screen reader user and keyboard user.
+  -->
+  <a class="skip js-skip" href="#main">skip to main content</a>
   <header class="layout" role="banner">
     <p class="label">role="banner"</p>
     <p class="link"><a href="http://www.w3.org/TR/wai-aria/roles#landmark_roles" target="_blank">http://www.w3.org/TR/wai-aria/roles#landmark_roles</a></p>
@@ -70,7 +100,7 @@
     </div>
   </header>
   <div class="content">
-    <main class="layout" role="main">
+    <main class="layout" role="main" id="main">
       <p class="label">role="main"</p>
       <div class="form layout">
         <p class="label">role="fom"</p>
