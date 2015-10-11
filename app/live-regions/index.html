@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Regions</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    li {
+      display: block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live Regions</h1>
+  <ul>
+    <li>To make a user recognize edited message we can use aria-live / aria-role / aria-atomic</li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions">aria-live</a></li>
+    <li><a href="http://www.w3.org/TR/wai-aria/roles#widget_roles_header">aria-role</a></li>
+    <li><a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-atomic">aria-atomic</a></li>
+  </ul>
+  <div class="example">
+    <button class="button" type="button">update time</button>
+    <!--
+      if aria-atomic attribute is not added only time text are speeched by screen reader.
+      'update time' and time text are speeched by adding aria-atomic attribute.
+      http://blog.e-riverstyle.com/2013/12/ajaxwaiarialive-regions.html
+    -->
+    <section class="message" aria-live="polite" role-"status" aria-atomic="true">
+      <h2>updated time</h2>
+      <p class="time"></p>
+    </section>
+  </div>
+
+  <script>
+    var button = document.querySelectorAll('.button')[0];
+    var time   = document.querySelectorAll('.time')[0];
+
+    button.addEventListener('click', updateButton);
+
+    function updateButton() {
+      time.innerText = new Date().toString();
+    }
+
+    updateButton();
+  </script>
+</body>
+</html>
