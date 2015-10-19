@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>form hint</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    [role="tooltip"]{
+      display: none;
+      border: 1px solid red;
+    }
+    input:focus + [role="tooltip"]{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>form hint</h1>
+      <p>hmw to show form hint</p>
+      <!--
+        legend -> label -> aria-describeby で紐付けられた role="tooltip" が読み上げられる
+        e.g. ログインフォーム ユーザ名 ユーザ名はあなたののEmailアドレスを入力してください
+      -->
+      <div class="example">
+        <form>
+          <fieldset>
+            <legend>ログインフォーム</legend>
+            <div>
+              <label for="username">ユーザ名</label>
+              <input type="text" id="username" aria-describeby="username-hint">
+              <div id="username-hint" role="tooltip">ユーザ名はあなたのEmailアドレスを入力してください</div>
+            </div>
+            <div>
+              <label for="password">パスワード</label>
+              <input type="text" id="password" aria-describeby="password-hint">
+              <div id="password-hint" role="tooltip">8文字以上の英数字をご利用ください</div>
+            </div>
+          </fieldset>
+          <button type="submit">送信する</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>image text</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    [aria-hidden]{
+      display: none;
+    }
+    [aria-hidden="false"]{
+      display: block;
+    }
+    [aria-expanded]:before{
+      content: '\25ba\0020';
+    }
+    [aria-expanded="false"]:before{
+      content: '\25bc\0020';
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>toggle list</h1>
+      <!--
+        aria-expanded が true になるまでは回答は読みあげられないほうがいいので、 回答部分の aria-hidden は true になっている
+        hタグにrole=buttonを入れるのはセマンティックが失われるのでやらない
+      -->
+      <div class="example">
+        <h2><button aria-expanded="false" aria-controls="how-do-I-change-my-password">パスワードはどのように変更しますか</button></h2>
+        <div id="how-do-I-change-my-password" aria-hidden="true">
+          <p>それは..............................</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    $('button').on('click', function(){
+      $(this).attr('aria-expanded', $(this).attr('aria-expanded') === 'false' ? true : false);
+      var desc = $('#' + $(this).attr('aria-controls'));
+      desc.attr('aria-hidden', desc.attr('aria-hidden') === 'false' ? true : false);
+    });
+  </script>
+</body>
+</html>

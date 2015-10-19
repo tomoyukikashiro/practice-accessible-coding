@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>menu</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    [aria-hidden]{
+      display: none;
+    }
+    [aria-hidden="false"]{
+      display: block;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>menu</h1>
+      <!--
+        メニュー展開後は最初のメニューへ自動でフォーカスを移してあげる
+        この例だと、aria-hiddenによって、nav要素が消えてるので、ランドマークがリーダーから見えない
+        よって、nav要素をcloneして画面外においておくことでランドマークとしても機能させるようにしているa
+        http://heydonworks.com/practical_aria_examples/progressive-hamburger.html
+      -->
+      <div class="example">
+        <a href="#navigation" role="button" aria-controls="navigation" aria-expanded="false">メニュー</a>
+        <nav id="navigation" role="navigation" aria-hidden="true">
+          <ul>
+            <li><a href="/page1">page 1</a></li>
+            <li><a href="/page2">page 2</a></li>
+            <li><a href="/page3">page 3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </main>
+  <script>
+    $('a[href="#navigation"]').on('click', function(){
+      $(this).attr('aria-expanded', $(this).attr('aria-expanded') === 'false' ? true : false);
+      var desc = $('#' + $(this).attr('aria-controls'));
+      desc.attr('aria-hidden', desc.attr('aria-hidden') === 'false' ? true : false);
+
+      // 展開後、最初のメニューへfocusを自動で移動させる
+      desc.find('a').eq(0).focus();
+      return false;
+    });
+  </script>
+</body>
+</html>

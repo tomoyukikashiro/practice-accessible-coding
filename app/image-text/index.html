@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>image text</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    .ir{
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>image text</h1>
+      <p>hide text visually</p>
+      <!--
+        実際は画像を背景にして、英語であれば、adobeのblankフォントを使うのが早いかも
+        それ以外は、image replaceを利用
+      -->
+      <div class="example">
+        <h2><img src="http://dummyimage.com/600x400/000000/ffffff.png&text=image+text" alt=""><span class="ir">image text</span></h2>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
