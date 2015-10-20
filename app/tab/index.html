@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tab</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    .section{
+      width 50%;
+      height 300px;
+      border: 1px solid #999;
+    }
+    [aria-hidden]{
+      display: none;
+    }
+    [aria-hidden=false]{
+      display: block;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>tab</h1>
+      <!--
+      -->
+      <div class="example">
+        <ul role="tablist">
+          <li role="presentation"><a href="#section1" role="tab" aria-controls="section1" aria-selected="true">セクション1</a></li>
+          <li role="presentation"><a href="#section2" role="tab" aria-controls="section2" tabindex="-1">セクション2</a></li>
+          <li role="presentation"><a href="#section3" role="tab" aria-controls="section3" tabindex="-1">セクション3</a></li>
+        </ul>
+        <!-- section タグには、role=tabpanelは付与は許されてないため、divでくくる-->
+        <!--
+          tabpanel 要素自体にtabindex=0でフォーカス可能にすると、「タブパネル」と呼び上げられなくな
+          よって、タブパネルの要素のh3にtabindexを与えてフォーカス可能にする
+          見出しレベル3、セクション1、タブパネル と呼び上げられる
+        -->
+        <div role="tabpanel" aria-hidden="false" id="section1" class="section">
+          <section>
+            <h3 tabindex="0">セクション1</h3>
+          </section>
+        </div>
+        <div role="tabpanel" aria-hidden="true" id="section2" class="section">
+          <section>
+            <h3 tabindex="0">セクション2</h3>
+          </section>
+        </div>
+        <div role="tabpanel" aria-hidden="true" id="section3" class="section">
+          <section>
+            <h3 tabindex="0">セクション3</h3>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    var tabAll = $('[role=tab]');
+    $(document).on('keyup', function(e){
+      var ae = $(document.activeElement);
+      if(ae.attr('role') === 'tab'){
+        if(e.keyCode === 39){
+          // right
+          $(ae.parent().next().length > 0 ? ae.parent().next().find('a') : tabAll.eq(0)).focus();
+        }else if(e.keyCode === 37){
+          // left
+          $(ae.parent().prev().length > 0 ? ae.parent().prev().find('a') : tabAll.eq(tabAll.length -1)).focus();
+        }
+      }
+    });
+
+    $('[role=tab]').on('focus', function(){
+      tabpanel = $('#' + $(this).attr('aria-controls'));
+
+      // 開いているtabpanelをとじる
+      $('[role=tabpanel][aria-hidden=false]').attr('aria-hidden', true);
+      // ターゲットのtabpanelを開く
+      tabpanel.attr('aria-hidden', false);
+    });
+  </script>
+</body>
+</html>
