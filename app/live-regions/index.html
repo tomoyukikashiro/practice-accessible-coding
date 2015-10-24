@@ -25,8 +25,18 @@
       if aria-atomic attribute is not added only time text are speeched by screen reader.
       'update time' and time text are speeched by adding aria-atomic attribute.
       http://blog.e-riverstyle.com/2013/12/ajaxwaiarialive-regions.html
+
+      ユーザの動作が終わってから通知：aria-live="polite" と role="status"
+      ユーザの動作にかかわらず中断して通知：aria-live="assertive" と role="alert"
+      .timeの内容が変更されると、時間だけが読み直される
+      ただ、updated time => .time の順で呼ばれた方がわかりやすいので、
+      aria-atomicを指定している。そうすることで、aria-atomicが指定されている要素内すべてが読み上げられる
+      aria-atomicはaria-liveが設定さている要素内に複数あってもいい
+      aria-liveに対する変更が複数行わる場合、1つの変更前に対象要素にaria-busy="true"を設定して、
+      読み上げ後くらいの時間を見計らって、falseにする。その後 2つめの変更をする
+
     -->
-    <section class="message" aria-live="polite" role-"status" aria-atomic="true">
+    <section id="message" aria-live="polite" role-"status" aria-atomic="true">
       <h2>updated time</h2>
       <p class="time"></p>
     </section>

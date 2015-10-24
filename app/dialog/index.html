@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dialog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    button{
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    dialog{
+      display: none;
+      border: 1px solid #999;
+      padding: 10px;
+    }
+    dialog[open]{
+      display: block;
+    }
+  </style>
+  <script>
+    document.createElement('dialo');
+  </script>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>dialog</h1>
+      <!--
+        role="alertdialog" : アラートを定義
+        tabindex="0"とaria-describebyにすることで、アラートにフォーカスが当たるたびに、説明が読み上げられる
+
+        その他の注意点
+         - 1 モーダルが開いている間はその他の要素とインタラクションをできないようにする
+         - 2 フォーカスはダイアログ以外に、アドレスバー、戻るボタンには行けるようにする
+         - 3 モーダルを閉じた時は、呼び出した要素にフォーカスを戻す
+         - 4 escキーで閉じるようにする
+
+         1,2を実現する方法としては、body直下にdialogを配置して以下のようにする
+         $('body > *:not(dialog)').addClass('mod-hidden'); // mod-hiddenはvisibility: hidden
+      -->
+      <div class="example">
+        <button id="open-dialog">show dialog</button>
+        <dialog tabindex="0" aria-describeby="message" role="alertdialog">
+          <p id="message">Are you ok ?</p>
+          <button>Yes</button>
+        </dialog>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.getElementById('open-dialog').addEventListener('click', function(){
+      var dialog = document.getElementsByTagName('dialog')[0];
+      if(dialog.hasAttribute('open')){
+        dialog.removeAttribute('open');
+      }else{
+        dialog.setAttribute('open', true);
+      }
+    });
+  </script>
+</body>
+</html>
