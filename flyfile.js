@@ -37,7 +37,7 @@ export function* copy() {
 
 // Clean output directory
 export function* clean() {
-  yield this.clear(["dist"]);
+  yield this.clear(["dist/{*, !^\.*}"]);
 }
 
 // Reload browser
