@@ -29,10 +29,15 @@ export function* serve() {
 export function* copy() {
   yield this.
     source([
-      "app/**/*.html",
-      "app/scripts/**/*.js"
+      "app/**/*.html"
     ])
     .target("dist/")
+  yield this.
+    source([
+      "app/styles/main.css"
+    ])
+    .target("dist/styles/")
+
 }
 
 // Clean output directory
